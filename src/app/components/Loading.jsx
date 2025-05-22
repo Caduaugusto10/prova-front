@@ -6,8 +6,14 @@ export default function Loading() {
     return (
         <div className={styles.loading}>
             <Image
-                src=""
+                src="/images/loading.gif"
+                alt="Loading"
+                width={400}
+                height={300}
+                priority={true}
             />
+
+            <p>Carregando Filmes...</p>
         </div>
     )
 }
