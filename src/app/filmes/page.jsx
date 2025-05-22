@@ -6,11 +6,12 @@ import { Pagination, Modal, Card, Skeleton } from "antd";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import styles from "./Filmes.module.css";
-
+import Header from "../components/Header";
 
 const HEADERS = { "x-api-key": process.env.NEXT_PUBLIC_API_KEY };
 
 export default function Filmes() {
+    
     const [data, setData] = useState({
         filmes: [],
         loading: true,
@@ -26,7 +27,7 @@ export default function Filmes() {
     });
 
     useEffect(() => {
-        const fetchFilmes = async = () => {
+        const fetchFilmes = async () => {
             try {
                 const { data: filmes } = await axios.get(
                     `${process.env.NEXT_PUBLIC_API_URL}/filmes`,
@@ -64,7 +65,8 @@ export default function Filmes() {
 
     return (
         <div>
-            <h1>Lista de Filmes</h1>
+            <Header />
+            <h1 className={styles.filmesTitle}>Lista de Filmes</h1>
             <Pagination
                 current={data.current}
                 pageSize={data.pageSize}
@@ -94,7 +96,7 @@ export default function Filmes() {
                             cover={
                                 <Image 
                                 alt={filmes.name}
-                                src={filmes.photo || "/images/200.svg"}
+                                src={filmes.photo || "/public/images/200.svg"}
                                 width={220}
                                 height={220}
                                 />
@@ -143,9 +145,9 @@ export default function Filmes() {
                             {modalInfo.generos.descricao}
                         </p>
                     </div>
-                   ) : (
+                    ) : (
                     <p style={{ textAlign: "center" }}>Gêneros não encontrados</p>
-                   )}
+                    )}
             </Modal>
             <ToastContainer position="top-right" autoClose={4500} />
         </div>
